@@ -59,3 +59,24 @@ def display_images(temp_df):
         plt.imshow(image)
         plt.title('\n'.join(wrap(temp_df.caption[i], 20)))
         plt.axis('off')
+
+
+
+# ==============================================
+# Caption Text Preprocessing Steps
+# ==============================================
+
+def text_preprocessing(data):
+    data['caption'] = data['caption'].apply(lambda x: x.lower())
+    data['caption'] = data['caption'].apply(lambda x: x.replace('[^A-Za-z]',''))
+    data['caption'] = data['caption'].apply(lambda x: x.replace('\s+',' '))
+    data['caption'] = data['caption'].apply(lambda x: ' '.join([word for word in x.split() if len(word)>1]))
+    data['caption'] = 'startseq '+data['caption']+' endseq'
+
+    return data
+
+data = text_preprocessing(data)
+
+captions = data['caption'].tolist()
+
+print(captions[:10])
