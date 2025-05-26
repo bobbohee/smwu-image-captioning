@@ -35,3 +35,27 @@ path = os.getcwd()
 image_path = path + '/data/Images-30'
 data = pd.read_csv(path + '/data/captions-30.txt')
 # print(data.head())
+
+# ==============================================
+# Visualization
+# ==============================================
+
+def readImage(path,img_size=224):
+    img = load_img(path,color_mode='rgb',target_size=(img_size,img_size))
+    img = img_to_array(img)
+    img = img/255.
+
+    return img
+
+def display_images(temp_df):
+    temp_df = temp_df.reset_index(drop=True)
+    plt.figure(figsize = (20 , 20))
+    n = 0
+    for i in range(15):
+        n+=1
+        plt.subplot(5 , 5, n)
+        plt.subplots_adjust(hspace = 0.7, wspace = 0.3)
+        image = readImage(f'{path}/data/Images-30/{temp_df.image[i]}')
+        plt.imshow(image)
+        plt.title('\n'.join(wrap(temp_df.caption[i], 20)))
+        plt.axis('off')
