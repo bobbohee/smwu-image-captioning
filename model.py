@@ -25,3 +25,13 @@ from textwrap import wrap
 plt.rcParams['font.size'] = 12
 sns.set_style('dark')
 warnings.filterwarnings('ignore')
+
+# ==============================================
+# Load Dataset
+# ==============================================
+
+path = os.getcwd()
+
+image_path = path + '/data/Images-30'
+data = pd.read_csv(path + '/data/captions-30.txt')
+# print(data.head())
