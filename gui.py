@@ -1,5 +1,6 @@
 import tkinter as tk
 import urllib.request
+from tts import speak_caption
 from PIL import Image, ImageTk
 
 frame = tk.Tk()
@@ -37,7 +38,7 @@ def download_image():
 
         cap.config(state='normal')
         cap.delete(0, tk.END)
-        cap.insert(0, "*우왕 캡션")  #여기에 캡션 넣기
+        cap.insert(0, "우왕 캡션")  #여기에 캡션 넣기
         cap.config(state='disabled')
 
         #TTS 출력 추가
@@ -51,10 +52,12 @@ def download_image():
 #캡션&TTS 출력
 capLabel = tk.Label(frame, text="캡션", font=("맑은 고딕", 12))
 btnImg = tk.PhotoImage(file="TTSbutton.png")
-capTTS = tk.Button(frame, image=btnImg)
+
 cap = tk.Entry(frame, width=100)
-#cap.insert(0, "")
 cap.config(state='disabled')
+
+capTTS = tk.Button(frame, image=btnImg, command=lambda: speak_caption(cap.get()))
+
 
 
 
