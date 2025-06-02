@@ -12,13 +12,17 @@ label = tk.Label(frame)
 #URL 입력받기
 urlLabel = tk.Label(frame, text="이미지 URL 입력", font=("맑은 고딕", 12))
 urldown = tk.Button(frame, text="시작", command=lambda: download_image())
-urlinput = tk.Entry(frame, width=100)
+urlinput = tk.Text(frame, height=1, width=100)
 
 
 #URL 이미지 로컬에 다운로드
 def download_image():
-    url = urlinput.get()
+    url = urlinput.get("1.0", tk.END).strip()
     save = "image.png"
+
+    #한글 포함된 URL 처리
+    url = urllib.parse.quote(url, safe=':/?&=')
+    #print(url)
 
     try:
         with urllib.request.urlopen(url) as response:
@@ -40,8 +44,6 @@ def download_image():
         cap.delete(0, tk.END)
         cap.insert(0, "우왕 캡션")  #여기에 캡션 넣기
         cap.config(state='disabled')
-
-        #TTS 출력 추가
 
     except Exception as e:
         print(f"이미지 다운로드 실패: {e}")
