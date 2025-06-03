@@ -1,6 +1,8 @@
+
 # ==============================================
 # Imports Tools and Libraries
 # ==============================================
+
 import numpy as np
 import pandas as pd
 import os
@@ -26,6 +28,7 @@ plt.rcParams['font.size'] = 12
 sns.set_style('dark')
 warnings.filterwarnings('ignore')
 
+
 # ==============================================
 # Load Dataset
 # ==============================================
@@ -35,6 +38,7 @@ path = os.getcwd()
 image_path = path + '/data/Images-30'
 data = pd.read_csv(path + '/data/captions-30.txt')
 # print(data.head())
+
 
 # ==============================================
 # Visualization
@@ -61,7 +65,6 @@ def display_images(temp_df):
         plt.axis('off')
 
 
-
 # ==============================================
 # Caption Text Preprocessing Steps
 # ==============================================
@@ -79,7 +82,7 @@ data = text_preprocessing(data)
 
 captions = data['caption'].tolist()
 
-print(captions[:10])
+# print(captions[:10])
 
 
 # ==============================================
@@ -104,12 +107,13 @@ test = data[data['image'].isin(val_images)]
 train.reset_index(inplace=True,drop=True)
 test.reset_index(inplace=True,drop=True)
 
-print(tokenizer.texts_to_sequences([captions[1]])[0])
+# print(tokenizer.texts_to_sequences([captions[1]])[0])
 
 
 # ==============================================
 # Image Feature Extraction
 # ==============================================
+
 model = DenseNet201()
 fe = Model(inputs=model.input, outputs=model.layers[-2].output)
 
@@ -123,9 +127,11 @@ for image in tqdm(data['image'].unique().tolist()):
     feature = fe.predict(img, verbose=0)
     features[image] = feature
 
+
 # ==============================================
 # Data Generation
 # ==============================================
+
 class CustomDataGenerator(Sequence):
 
     def __init__(self, df, X_col, y_col, batch_size, directory, tokenizer,
@@ -181,7 +187,6 @@ class CustomDataGenerator(Sequence):
 
         return X1, X2, y
 
-
 train_generator = CustomDataGenerator(df=train,X_col='image',y_col='caption',batch_size=64,directory=image_path,
                                       tokenizer=tokenizer,vocab_size=vocab_size,max_length=max_length,features=features)
 
@@ -235,11 +240,22 @@ learning_rate_reduction = ReduceLROnPlateau(monitor='val_loss',
                                             factor=0.2,
                                             min_lr=0.00000001)
 
-
-
-
 history = caption_model.fit(
         train_generator,
         epochs=50,
         validation_data=validation_generator,
         callbacks=[checkpoint,earlystopping,learning_rate_reduction])
+
+
+# ==============================================
+# Caption Generation Utility Functions
+# ==============================================
+
+import pickle
+
+# Save the tokenizer
+with open('tokenizer.pkl', 'wb') as f:
+    pickle.dump(tokenizer, f)
+
+# Save the feature extractor model
+fe.save('feature_extractor.keras')
