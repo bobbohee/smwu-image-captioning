@@ -2,6 +2,7 @@ import tkinter as tk
 import urllib.request
 from tts import speak_caption
 from PIL import Image, ImageTk
+from translator import translate_text
 
 frame = tk.Tk()
 frame.title("눈뜬송이")
@@ -42,7 +43,9 @@ def download_image():
 
         cap.config(state='normal')
         cap.delete(0, tk.END)
-        cap.insert(0, "우왕 캡션")  #여기에 캡션 넣기
+        sample_caption = "Wow caption" #여기에 모델 생성 영어 캡션 삽입
+        translated = translate_caption(sample_caption)
+        cap.insert(0, translated)
         cap.config(state='disabled')
 
     except Exception as e:
@@ -61,6 +64,14 @@ cap.config(state='disabled')
 capTTS = tk.Button(frame, image=btnImg, command=lambda: speak_caption(cap.get()))
 
 
+#번역모듈
+def translate_caption(text):
+    try:
+        translated_text = translate_text(text)
+        return translated_text
+    except Exception as e:
+        print(f"번역 실패: {e}")
+        return "번역 실패"
 
 
 urlLabel.pack()
