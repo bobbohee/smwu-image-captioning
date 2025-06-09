@@ -26,3 +26,20 @@ def generate_and_display_caption(image_path, model_path, tokenizer_path, feature
     img = img_to_array(img) / 255.0  # Normalize pixel values
     img = np.expand_dims(img, axis=0)
     image_features = feature_extractor.predict(img, verbose=0)  # Extract image features
+
+    # Generate the caption
+    in_text = 'startseq'
+    for i in range(max_length):
+        sequence = tokenizer.texts_to_sequences([in_text])[0]
+        sequence = pad_sequences([sequence], maxlen=max_length)
+        yhat = caption_model.predict([image_features, sequence], verbose=0)
+        yhat_index = np.argmax(yhat)
+        word = tokenizer.index_word.get(yhat_index, None)
+        if word is None:
+            break
+        in_text += ' ' + word
+        if word == 'endseq':
+            break
+    caption = in_text.replace('startseq', '').replace('endseq', '').strip()
+
+    return caption
