@@ -2,7 +2,7 @@ import tkinter as tk
 import urllib.request
 from tts import speak_caption
 from PIL import Image, ImageTk
-from translator import translate_text
+from translator import translate_caption
 
 frame = tk.Tk()
 frame.title("눈뜬송이")
@@ -62,17 +62,6 @@ cap = tk.Entry(frame, width=100)
 cap.config(state='disabled')
 
 capTTS = tk.Button(frame, image=btnImg, command=lambda: speak_caption(cap.get()))
-
-
-#번역모듈
-def translate_caption(text):
-    try:
-        translated_text = translate_text(text)
-        return translated_text
-    except Exception as e:
-        print(f"번역 실패: {e}")
-        return "번역 실패"
-
 
 urlLabel.pack()
 urldown.pack()
