@@ -1,4 +1,5 @@
 import os
+import numpy as np
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
@@ -19,3 +20,9 @@ def generate_and_display_caption(image_path, model_path, tokenizer_path, feature
 
     with open(tokenizer_path, 'rb') as f:
         tokenizer = pickle.load(f)
+
+    # Preprocess the image
+    img = load_img(image_path, target_size=(img_size, img_size))
+    img = img_to_array(img) / 255.0  # Normalize pixel values
+    img = np.expand_dims(img, axis=0)
+    image_features = feature_extractor.predict(img, verbose=0)  # Extract image features
