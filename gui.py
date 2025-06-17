@@ -52,18 +52,10 @@ def download_image():
 
         cap.config(state='normal')
         cap.delete(0, tk.END)
-
-        #모델 캡션 생성
-        caption =saved_model.generate_and_display_caption(
-            image_path='image.png', 
-            model_path='model.keras',
-            tokenizer_path='tokenizer.pkl',
-            feature_extractor_path='feature_extractor.keras',
-            max_length=34,
-            img_size=224)
         
-        translated = translate_caption(caption)
-        cap.insert(0, translated)
+        #번역된 캡션 생성
+        caption = translate_caption()
+        cap.insert(0, caption)
         cap.config(state='disabled')
 
     except Exception as e:
