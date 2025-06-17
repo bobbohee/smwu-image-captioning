@@ -5,7 +5,6 @@ from tts import speak_caption
 from PIL import Image, ImageTk
 from trans import translate_caption
 from urllib.parse import urlsplit, urlunsplit, quote
-import saved_model
 
 frame = tk.Tk()
 frame.title("눈뜬송이")
@@ -52,7 +51,7 @@ def download_image():
 
         cap.config(state='normal')
         cap.delete(0, tk.END)
-        
+
         #번역된 캡션 생성
         caption = translate_caption()
         cap.insert(0, caption)
