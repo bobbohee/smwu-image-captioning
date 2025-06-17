@@ -3,8 +3,9 @@ import urllib.request
 import urllib.parse
 from tts import speak_caption
 from PIL import Image, ImageTk
-from translator import translate_caption
+from trans import translate_caption
 from urllib.parse import urlsplit, urlunsplit, quote
+import saved_model
 
 frame = tk.Tk()
 frame.title("눈뜬송이")
@@ -51,8 +52,16 @@ def download_image():
 
         cap.config(state='normal')
         cap.delete(0, tk.END)
-        sample_caption = "Wow caption" #여기에 모델 생성 영어 캡션 삽입
-        translated = translate_caption(sample_caption)
+
+        caption =saved_model.generate_and_display_caption(
+            image_path='image.png', 
+            model_path='model.keras',
+            tokenizer_path='tokenizer.pkl',
+            feature_extractor_path='feature_extractor.keras',
+            max_length=34,
+            img_size=224)
+        
+        translated = translate_caption(caption)
         cap.insert(0, translated)
         cap.config(state='disabled')
 
