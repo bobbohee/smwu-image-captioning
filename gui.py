@@ -53,6 +53,7 @@ def download_image():
         cap.config(state='normal')
         cap.delete(0, tk.END)
 
+        #모델 캡션 생성
         caption =saved_model.generate_and_display_caption(
             image_path='image.png', 
             model_path='model.keras',
