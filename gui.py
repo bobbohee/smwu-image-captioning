@@ -3,7 +3,7 @@ import urllib.request
 import urllib.parse
 from tts import speak_caption
 from PIL import Image, ImageTk
-from translator import translate_caption
+from trans import translate_caption
 from urllib.parse import urlsplit, urlunsplit, quote
 
 frame = tk.Tk()
@@ -51,9 +51,10 @@ def download_image():
 
         cap.config(state='normal')
         cap.delete(0, tk.END)
-        sample_caption = "Wow caption" #여기에 모델 생성 영어 캡션 삽입
-        translated = translate_caption(sample_caption)
-        cap.insert(0, translated)
+
+        #번역된 캡션 생성
+        caption = translate_caption()
+        cap.insert(0, caption)
         cap.config(state='disabled')
 
     except Exception as e:
