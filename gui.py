@@ -1,8 +1,10 @@
 import tkinter as tk
 import urllib.request
+import urllib.parse
 from tts import speak_caption
 from PIL import Image, ImageTk
 from translator import translate_caption
+from urllib.parse import urlsplit, urlunsplit, quote
 
 frame = tk.Tk()
 frame.title("눈뜬송이")
@@ -13,17 +15,23 @@ label = tk.Label(frame)
 #URL 입력받기
 urlLabel = tk.Label(frame, text="이미지 URL 입력", font=("맑은 고딕", 12))
 urldown = tk.Button(frame, text="시작", command=lambda: download_image())
-urlinput = tk.Text(frame, height=1, width=100)
+urlinput = tk.Text(frame, height=2, width=100)
+
+
+#한글 포함된 URL 처리
+def url_encode(u):
+    parts = urlsplit(u)
+    path = quote(parts.path)
+    return urlunsplit((parts.scheme, parts.netloc, path, parts.query, parts.fragment))
 
 
 #URL 이미지 로컬에 다운로드
 def download_image():
-    url = urlinput.get("1.0", tk.END).strip()
+    K_url = urlinput.get("1.0", tk.END).strip()
     save = "image.png"
 
-    #한글 포함된 URL 처리
-    url = urllib.parse.quote(url, safe=':/?&=')
-    #print(url)
+    url = url_encode(K_url)
+    print(K_url)
 
     try:
         with urllib.request.urlopen(url) as response:
