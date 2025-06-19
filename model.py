@@ -34,8 +34,8 @@ warnings.filterwarnings('ignore')
 
 path = os.getcwd()
 
-image_path = path + '/src/dataset/Images'
-data = pd.read_csv(path + '/src/dataset/captions.txt')
+image_path = path + '/src/dataset-30k/Images'
+data = pd.read_csv(path + '/src/dataset-30k/captions.txt')
 
 # print(data.head())
 
@@ -60,7 +60,7 @@ def display_images(temp_df):
         n += 1
         plt.subplot(5, 5, n)
         plt.subplots_adjust(hspace=0.7, wspace=0.3)
-        image = readImage(f'{path}/src/dataset/Images/{temp_df.image[i]}')
+        image = readImage(f'{path}/src/dataset-30k/Images/{temp_df.image[i]}')
         plt.imshow(image)
         plt.title('\n'.join(wrap(temp_df.caption[i], 20)))
         plt.axis('off')
@@ -71,7 +71,7 @@ def display_images(temp_df):
 # ==============================================
 
 def text_preprocessing(data):
-    data['caption'] = data['caption'].apply(lambda x: x.lower())
+    data['caption'] = data['caption'].apply(lambda x: str(x).lower())
     data['caption'] = data['caption'].apply(lambda x: x.replace('[^A-Za-z]', ''))
     data['caption'] = data['caption'].apply(lambda x: x.replace('\s+', ' '))
     data['caption'] = data['caption'].apply(lambda x: ' '.join([word for word in x.split() if len(word) > 1]))

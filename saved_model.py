@@ -10,7 +10,7 @@ tokenizer_path = 'tokenizer.pkl'
 feature_extractor_path = 'feature_extractor.keras'
 
 
-def generate_and_display_caption(image_path, model_path, tokenizer_path, feature_extractor_path, max_length=34, img_size=224):
+def generate_and_display_caption(image_path, max_length=74, img_size=224):
     # Load the trained models and tokenizer
     caption_model = load_model(model_path)
     feature_extractor = load_model(feature_extractor_path)
