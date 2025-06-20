@@ -243,9 +243,26 @@ learning_rate_reduction = ReduceLROnPlateau(monitor='val_loss',
 
 history = caption_model.fit(
     train_generator,
-    epochs=50,
+    epochs=25,
     validation_data=validation_generator,
     callbacks=[checkpoint, earlystopping, learning_rate_reduction])
+
+# ==============================================
+# 학습 결과 시각화 (Loss 그래프)
+# ==============================================
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(8, 6))
+plt.plot(history.history['loss'], label='Train Loss')
+plt.plot(history.history['val_loss'], label='Validation Loss')
+plt.title('Training & Validation Loss')
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.savefig('loss_plot.png')  # 이미지 파일로 저장
+plt.show()
 
 
 # ==============================================
