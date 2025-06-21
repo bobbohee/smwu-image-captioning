@@ -27,7 +27,7 @@
 
 ## 2. 프로젝트 목적
 
-<img src="purpose.png" alt="프로젝트 목적" style="max-width: 600px;"/>
+<img src="src/readme/purpose.png" alt="프로젝트 목적" style="max-width: 600px;"/>
 
 - 이미지의 시각적 정보를 분석하고, 자연어로 설명을 생성하여 시각장애인에게 제공
 - 생성된 설명을 음성으로 출력하여 직관적이고 즉각적인 정보 전달
@@ -52,10 +52,10 @@
 <table>
     <tr>
         <td valign="top">
-            <img src="result1.png" alt="프로젝트 결과: 정상 예시"/>
+            <img src="src/readme/result1.png" alt="프로젝트 결과: 정상 예시"/>
         </td>
         <td valign="top">
-            <img src="result2.png" alt="프로젝트 결과: 오류  예시"/>
+            <img src="src/readme/result2.png" alt="프로젝트 결과: 오류  예시"/>
         </td>
     </tr>
     <tr>
