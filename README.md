@@ -1,13 +1,13 @@
-# 시각장애인을 위한 이미지 설명 생성 및 음성 출력
+# Image Captioning and Speech Output System for the Visually Impaired  🧑‍🦯
 
-1. [프로젝트 배경](#1-프로젝트-배경)
-2. [프로젝트 목적](#2-프로젝트-목적)
-3. [프로젝트 설명](#3-프로젝트-설명)
-4. [프로젝트 결과](#4-프로젝트-결과)
-5. [프로젝트 설치](#5-프로젝트-설치)
-6. [프로젝트 실행](#6-프로젝트-실행)
-7. [언어 및 프레임워크](#7-언어-및-프레임워크)
-8. [팀원](#8-팀원)
+1. [Project Background](#1-project-background)
+2. [Project Objective](#2-project-objective)
+3. [Project Description](#3-project-description)
+4. [Project Results](#4-project-results)
+5. [Installation](#5-installation)
+6. [How to Run](#6-how-to-run)
+7. [Languages & Frameworks](#7-languages--frameworks)
+8. [Team Members](#8-team-members)
 
 <br/>
 
@@ -15,66 +15,66 @@
 
 <br/>
 
-## 1. 프로젝트 배경
+## 1. Project Background
 
-디지털화와 이미지 처리 기술의 발전으로, 이미지는 텍스트보다 더 직관적이고 효과적인 정보 전달 수단으로 널리 사용되고 있다.
-특히 관광지와 같은 장소에서는 시각적 정보가 경험의 핵심이 되며, 이미지를 통해 대부분의 정보가 전달된다.
+With the advancement of digitization and image processing technology, images are widely used as a more intuitive and effective medium for delivering information than text. 
+In particular, at tourist attractions, visual elements play a key role in the overall experience and serve as the primary means of conveying information.
 
-그러나 이러한 시각 정보는 시각장애인에게는 접근이 어려우며, 관광지와 같은 낯선 장소에서는 청각이나 촉각만으로는 공간을 충분히 이해하거나 즐기기 어렵다.
-이에 따라 시각장애인을 위한 시각 정보의 대체 수단이 필요할 것으로 생각된다.
-
-<br/>
-
-## 2. 프로젝트 목적
-
-<img src="src/readme/purpose.png" alt="프로젝트 목적" style="max-width: 600px;"/>
-
-- 이미지의 시각적 정보를 분석하고, 자연어로 설명을 생성하여 시각장애인에게 제공
-- 생성된 설명을 음성으로 출력하여 직관적이고 즉각적인 정보 전달
-- 이미지 URL 입력만으로 즉시 결과를 확인할 수 있는 사용자 친화적 GUI 프로그램 제공
-- 복잡한 절차 없이 간편한 조작만으로 이미지 설명을 생성하고 들을 수 있도록 지원
+However, such visual content is often inaccessible to the visually impaired. In unfamiliar environments like tourist sites, it's especially difficult to understand and enjoy the surroundings using only auditory or tactile information. 
+As a result, an alternative method for providing visual information to the visually impaired is needed.
 
 <br/>
 
-## 3. 프로젝트 설명
+## 2. Project Objective
 
-- 사전 학습된 딥러닝 기반 이미지 캡션 모델(DenseNet201 + LSTM)을 활용해 이미지를 자동으로 설명
-- 생성된 영어 캡션을 한국어로 번역해 사용자에게 친숙한 언어로 제공
-- 번역된 문장을 TTS(Text-to-Speech)를 통해 음성으로 출력
-- 사용자는 GUI에서 이미지 URL만 입력하면 자동으로 이미지 다운로드 → 분석 → 설명 생성 → 번역 → 음성 출력까지 전체 과정을 간편하게 실행할 수 있음
-- 전체 과정이 자동화되어 시각장애인의 정보 접근성을 향상시킴
+<img src="src/readme/purpose.png" alt="Project objective"/>
+
+- Analyze the visual content of an image and generate natural language captions for the visually impaired.
+- Output generated captions as speech for more intuitive and immediate information delivery.
+- Provide a user-friendly GUI that allows users to obtain captions by simply entering an image URL.
+- Support effortless interaction to make image captioning and audio output accessible with minimal steps.
 
 <br/>
 
-## 4. 프로젝트 결과
+## 3. Project Description
+
+- Automatically describe the content of images using a pre-trained deep learning model. (DenseNet201 + LSTM)
+- Translate generated English captions into Korean for accessibility.
+- Use TTS (Text-to-Speech) to convert the translated text into speech.
+- Users simply enter an image URL into the GUI; the program automatically downloads the image → analyzes it → generates a caption → translates it → and outputs it as speech.
+- The entire process is automated to improve information accessibility for the visually impaired.
+
+<br/>
+
+## 4. Project Results
 
 
 <table>
     <tr>
         <td valign="top">
-            <img src="src/readme/result1.png" alt="프로젝트 결과: 정상 예시"/>
+            <img src="src/readme/result1.png" alt="Successful example"/>
         </td>
         <td valign="top">
-            <img src="src/readme/result2.png" alt="프로젝트 결과: 오류  예시"/>
+            <img src="src/readme/result2.png" alt="Unsuccessful example"/>
         </td>
     </tr>
     <tr>
-        <td>정확한 설명이 생성된 경우</td>
-        <td>부정확하거나 추상적인 설명이 생성된 경우</td>
+        <td>Accurate caption is generated</td>
+        <td>Inaccurate or abstract caption is generated</td>
     </tr>
 </table>
 
 <br/>
 
-## 5. 프로젝트 설치
+## 5. Installation
 
-본 레포지토리를 clone 받는다.
+Clone the repository:
 
 ```bash
 $ git clone https://github.com/bobbohee/smwu-image-captioning
 ```
 
-파이썬은 3.10 이상의 버전을 사용하며, 파이썬 라이브러리를 설치한다.
+Ensure you have Python 3.10+ installed, then install the required packages:
 
 ```bash
 $ pip install -r requirements.txt
@@ -82,9 +82,9 @@ $ pip install -r requirements.txt
 
 <br/>
 
-## 6. 프로젝트 실행
+## 6. How to Run
 
-아래 명령어로 GUI 프로그램을 실행한다.
+Launch the GUI application using the command below:
 
 ```bash
 $ python gui.py
@@ -94,30 +94,30 @@ $ python gui.py
 
 ### 사용 방법 
 
-1. 프로그램 실행 후, 이미지 URL을 입력한다.
-2. 시작 버튼 클릭 시 이미지가 중앙에 출력되고, 자동으로 캡션이 생성된다.
-3. 캡션은 자동으로 한국어로 번역되며, 하단 입력창에 표시된다.
-4. 스피커 버튼을 클릭하면 해당 설명이 음성으로 출력된다.
+1. Run the program and enter an image URL.
+2. Click the "Start" button to load the image, which will appear in the center of the screen.
+3. A caption will be automatically generated and translated into Korean, then displayed below.
+4. Click the speaker icon to hear the caption read aloud.
 
 <br/>
 
-## 7. 언어 및 프레임워크
+## 7. Languages & Frameworks
 
-| 항목             | 사용 기술                                                  |
-|----------------|--------------------------------------------------------|
-| 언어 및 프레임워크     | Python 3.10+, TensorFlow (Keras API)                   |
-| 모델             | DenseNet201 (CNN), Embedding Layer, Bidirectional LSTM |
-| 전처리            | Pandas, NumPy, Tokenizer, pad_sequences                |
-| 학습 최적화         | Adam, EarlyStopping, ReduceLROnPlateau, ModelCheckpoint |
-| 사용자 인터페이스 (GUI) | tkinter                                                |
-| 번역             | googletrans, deep_translator                           |
-| 음성 출력 (TTS)    | gTTS                                                   |
+| Category           | Tools & Technologies |
+|--------------|----------------------|
+| Language / Framework	 | Python 3.10+, TensorFlow (Keras API) |
+| Model Architecture	 | DenseNet201 (CNN), Embedding Layer, Bidirectional LSTM |
+| Data Preprocessing	 | Pandas, NumPy, Tokenizer, pad_sequences |
+| Training Optimization	| Adam, EarlyStopping, ReduceLROnPlateau, ModelCheckpoint |
+| User Interface (GUI)	 | tkinter              |
+| Translation         | googletrans, deep_translator |
+| Text-to-Speech (TTS)	 | gTTS                 |
 
 <br/>
 
-## 8. 팀원
+## 8. Team Members
 
-- [@bobbohee](https://github.com/bobbohee): 숙명여자대학교 문헌정보학과 23학번 박보희
-- [@yumni-song](https://github.com/yumni-song): 숙명여자대학교 인공지능공학부 23학번 송유민
-- [@Limlim0208](https://github.com/Limlim0208): 숙명여자대학교 인공지능공학부 24학번 임유미
-- [@Seoyoung0325](https://github.com/Seoyoung0325): 숙명여자대학교 인공지능공학부 24학번 윤서영
+- [@bobbohee](https://github.com/bobbohee): Park Bohee, Department of Library & Information Science, Sookmyung Women's University
+- [@yumni-song](https://github.com/yumni-song): Song Yumin, Division of Artificial Intelligence Engineering, Sookmyung Women's University
+- [@Limlim0208](https://github.com/Limlim0208): Lim Yumi, Division of Artificial Intelligence Engineering, Sookmyung Women's University
+- [@Seoyoung0325](https://github.com/Seoyoung0325): Yoon Seoyoung, Division of Artificial Intelligence Engineering, Sookmyung Women's University
