@@ -65,7 +65,7 @@ def download_image():
 
 #캡션&TTS 출력
 capLabel = tk.Label(frame, text="캡션", font=("맑은 고딕", 12))
-btnImg = tk.PhotoImage(file="TTSbutton.png")
+btnImg = tk.PhotoImage(file="src/gui/tts_button.png")
 
 cap = tk.Entry(frame, width=100)
 cap.config(state='disabled')
